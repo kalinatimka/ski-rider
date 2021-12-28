@@ -1,3 +1,44 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-primary: (
+  main: #45abde,
+  lighter: #c7e6f5,
+  darker: #2e91d1,
+  200: #45abde, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+
+$mat-accent: (
+  main: #25434e,
+  lighter: #bec7ca,
+  darker: #162c35,
+  200: #25434e, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+
+$frontend-primary: mat-palette($mat-primary, main, lighter, darker);
+$frontend-accent: mat-palette($mat-accent, main, lighter, darker);
+$frontend-warn: mat-palette($mat-red);
+
+$frontend-theme: mat-light-theme((
+  color: (
+    primary: $frontend-primary,
+    accent: $frontend-accent,
+    warn: $frontend-warn,
+  )
+));
+
+@include angular-material-theme($frontend-theme);
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
