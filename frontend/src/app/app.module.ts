@@ -12,13 +12,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LotCardComponent } from './shared/components/lot-card/lot-card.component';
+import { CategoriesComponent } from './shared/components/categories/categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LotCardComponent
+    LotCardComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
