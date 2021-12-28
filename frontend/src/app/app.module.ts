@@ -13,6 +13,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LotCardComponent } from './shared/components/lot-card/lot-card.component';
 import { CategoriesComponent } from './shared/components/categories/categories.component';
+import { MainPageComponent } from './features/main-page/main-page.component';
+import { CategoryPageComponent } from './features/category-page/category-page.component';
+import { PaginationComponent } from './shared/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { CategoriesComponent } from './shared/components/categories/categories.c
     HeaderComponent,
     FooterComponent,
     LotCardComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    MainPageComponent,
+    CategoryPageComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
