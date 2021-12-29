@@ -16,6 +16,9 @@ import { CategoriesComponent } from './shared/components/categories/categories.c
 import { MainPageComponent } from './features/main-page/main-page.component';
 import { CategoryPageComponent } from './features/category-page/category-page.component';
 import { PaginationComponent } from './shared/components/pagination/pagination.component';
+import { LoginComponent } from './features/login/login.component';
+import { SignUpComponent } from './features/sign-up/sign-up.component';
+import { AddLotComponent } from './features/add-lot/add-lot.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { PaginationComponent } from './shared/components/pagination/pagination.c
     MainPageComponent,
     CategoryPageComponent,
     PaginationComponent,
+    LoginComponent,
+    SignUpComponent,
+    AddLotComponent,
   ],
   imports: [
     BrowserModule,
