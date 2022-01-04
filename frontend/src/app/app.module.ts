@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,14 +14,15 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { LotCardComponent } from './shared/components/lot-card/lot-card.component';
 import { CategoriesComponent } from './shared/components/categories/categories.component';
+import { PaginationComponent } from './shared/components/pagination/pagination.component';
+import { LotsListComponent } from './shared/components/lots-list/lots-list.component';
+
 import { MainPageComponent } from './features/main-page/main-page.component';
 import { CategoryPageComponent } from './features/category-page/category-page.component';
-import { PaginationComponent } from './shared/components/pagination/pagination.component';
 import { LoginComponent } from './features/login/login.component';
 import { SignUpComponent } from './features/sign-up/sign-up.component';
 import { AddLotComponent } from './features/add-lot/add-lot.component';
 import { LotPageComponent } from './features/lot-page/lot-page.component';
-import { LotsListComponent } from './shared/components/lots-list/lots-list.component';
 import { UserBidsPageComponent } from './features/user-bids-page/user-bids-page.component';
 
 @NgModule({
@@ -42,6 +44,8 @@ import { UserBidsPageComponent } from './features/user-bids-page/user-bids-page.
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
