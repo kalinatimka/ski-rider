@@ -8,4 +8,14 @@ export default class UserService {
             console.error(`Method: "getAllUsers". Message: ${e.message}`);
         }
     }
+
+    public async findUserByLogin(login: string) {
+        try {
+            return await DBUser.findOne({
+                where: { login }
+            });
+        } catch (e) {
+            console.error(`Method: "findUserByLogin". Arguments: login - ${login}. Message: ${e.message}`);
+        }
+    }
 }
