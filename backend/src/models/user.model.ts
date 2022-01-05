@@ -10,8 +10,11 @@ DBUser.init({
         primaryKey: true,
         autoIncrement: true
     },
+    mail: DataTypes.TEXT,
     login: DataTypes.TEXT,
-    password: DataTypes.TEXT
+    password: DataTypes.TEXT,
+    phone: DataTypes.TEXT,
+    avatar: DataTypes.TEXT
 }, {
     sequelize: db,
     modelName: 'user',

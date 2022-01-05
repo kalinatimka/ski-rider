@@ -5,19 +5,21 @@ import usersRouter from './routers/users.router';
 import lotsRouter from './routers/lots.router';
 import authRouter from './routers/authorize.router';
 
-import checkToken from './middlewares/check-token';
+// import checkToken from './middlewares/check-token';
 
 async function startServer() {
     const app = express();
 
     app.use(cors());
 
+    app.use('/uploads/avatars', express.static('uploads/avatars'));
+
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
     app.use('/auth', authRouter);
 
-    app.use(checkToken);
+    // app.use(checkToken);
 
     app.use('/users', usersRouter);
     app.use('/lots', lotsRouter);
