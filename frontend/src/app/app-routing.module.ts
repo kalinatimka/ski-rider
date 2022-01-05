@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './core/helpers/auth.guard';
 import { AddLotComponent } from './features/add-lot/add-lot.component';
 import { CategoryPageComponent } from './features/category-page/category-page.component';
 import { LoginComponent } from './features/login/login.component';
@@ -12,7 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'lot', component: LotPageComponent },
-  { path: 'add-lot', component: AddLotComponent },
+  { path: 'add-lot', component: AddLotComponent, canActivate: [AuthGuard] },
   { path: '', component: MainPageComponent },
 ];
 

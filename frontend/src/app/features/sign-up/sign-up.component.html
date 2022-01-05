@@ -1,44 +1,46 @@
 <main>
   <app-categories></app-categories>
-  <form class="form container">
-    <h2>Регистрация нового аккаунта</h2>
-    <div class="form__item"> <!-- form__item--invalid -->
-      <label for="email">E-mail*</label>
-      <input id="email" type="text" name="email" placeholder="Введите e-mail">
-      <span class="form__error">"Этот email занят!"</span>
-    </div>
-    <div class="form__item">
-      <label for="password">Пароль*</label>
-      <input id="password" type="password" name="password" placeholder="Введите пароль">
-      <span class="form__error">Введите пароль</span>
-    </div>
-    <div class="form__item">
-      <label for="name">Имя*</label>
-      <input id="name" type="text" name="name" placeholder="Введите имя">
-      <span class="form__error">Введите имя</span>
-    </div>
-    <div class="form__item">
-      <label for="message">Контактные данные*</label>
-      <textarea id="message" rows="4" name="message" placeholder="Напишите как с вами связаться" ></textarea>
-      <span class="form__error">Напишите как с вами связаться</span>
-    </div>
-    <div class="form__item form__item--file form__item--last">
-      <label>Аватар</label>
-      <div class="preview">
-        <button class="preview__remove" type="button">x</button>
-        <div class="preview__img">
-          <img src="img/avatar.jpg" width="113" height="113" alt="Ваш аватар">
-        </div>
-      </div>
-      <div class="form__input-file">
-        <input class="visually-hidden" type="file" id="photo2" value="" name="file">
-        <label for="photo2">
-          <span>+ Добавить</span>
+  <form [formGroup]="form" class="container form">
+    <h2 class="form__header">Регистрация нового аккаунта</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="Введите e-mail" formControlName="mail">
+      <mat-icon matSuffix>email</mat-icon>
+      <!-- <span class="form__error">"Этот email занят!"</span> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Пароль</mat-label>
+      <input matInput placeholder="Введите пароль" formControlName="password">
+      <mat-icon matSuffix>lock</mat-icon>
+      <!-- <span class="form__error">Введите пароль</span> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Имя</mat-label>
+      <input matInput placeholder="Введите имя" formControlName="name">
+      <mat-icon matSuffix>badge</mat-icon>
+      <!-- <span class="form__error">Введите имя</span> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Контактные данные</mat-label>
+      <textarea matInput placeholder="Напишите как с Вами связаться" formControlName="contact"></textarea>
+      <!-- <span class="form__error">Напишите как с вами связаться</span> -->
+    </mat-form-field>
+    <div class="form__avatar">
+      <h3 class="form__avatar-header">Аватар</h3>
+      <div  class="form__avatar-image">
+        <input class="form__avatar-file-input" type="file" id="fileInput" (change)="onSelectImageChange($event)">
+        <label for="fileInput" class="form__avatar-wrapper">
+          <div class="form__avatar-preview" [ngClass]="{'form__avatar-preview-visible': imgUrl}">
+            <button class="form__avatar-preview-remove" type="button">x</button>
+            <div class="form__avatar-preview-img">
+              <img [src]="imgUrl" width="115" height="115" alt="Ваш аватар">
+            </div>
+          </div>
+          <span class="form__avatar-button">+ Добавить</span>
         </label>
       </div>
     </div>
-    <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
-    <button type="submit" class="button">Зарегистрироваться</button>
-    <a class="text-link" href="login.php">Уже есть аккаунт</a>
+    <button type="submit" class="button" (click)="uploadData()">Зарегистрироваться</button>
+    <a class="form__login-link text-link" [routerLink]="['/login']">Уже есть аккаунт</a>
   </form>
 </main>
