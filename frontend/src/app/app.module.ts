@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -58,6 +59,7 @@ import { ImagePickerComponent } from './shared/components/image-picker/image-pic
     MatInputModule,
     MatIconModule,
     MatSelectModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
