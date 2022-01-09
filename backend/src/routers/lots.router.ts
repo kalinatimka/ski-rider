@@ -29,4 +29,16 @@ lotsRouter.get(
     }
 );
 
+lotsRouter.get(
+    '/getLotsByCategory/:categoryId',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const dbLots = await lotService.getLotsByCategory(req.params.categoryId);
+            res.send(dbLots);
+        } catch (e) {
+            return next(e);
+        }
+    }
+);
+
 export default lotsRouter;

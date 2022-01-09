@@ -16,7 +16,7 @@ DBLot.init({
     startPrice: DataTypes.INTEGER,
     bidStep: DataTypes.INTEGER,
     endDate: DataTypes.INTEGER,
-    image: DataTypes.INTEGER,
+    image: DataTypes.TEXT,
     idBrand: DataTypes.INTEGER,
     idType: DataTypes.INTEGER,
     idCategory: DataTypes.INTEGER,

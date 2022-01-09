@@ -16,6 +16,18 @@ export default class LotService {
         }
     }
 
+    public async getLotsByCategory(idCategory: string) {
+        try {
+            return await DBLot.findAll({
+                where: {
+                    idCategory
+                }
+            });
+        } catch (e) {
+            console.error(`Method: "getAllLots". Message: ${e.message}`);
+        }
+    }
+
     public async getSavedLots() {
         const idUser = 2;
         try {
