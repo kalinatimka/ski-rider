@@ -1,5 +1,6 @@
 import { Request, Response, Router, NextFunction } from 'express';
 
+import multerMW from '../middlewares/multer';
 import LotService from '../services/lot.service';
 
 const lotsRouter = Router();
@@ -34,6 +35,31 @@ lotsRouter.get(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const dbLots = await lotService.getLotsByCategory(req.params.categoryId);
+            res.send(dbLots);
+        } catch (e) {
+            return next(e);
+        }
+    }
+);
+
+lotsRouter.post(
+    '/addLot',
+    multerMW('./uploads/lots').single('image'),
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const dbLots = await lotService.addLot(
+                req.body.name,
+                req.body.description,
+                req.body.startPrice,
+                req.body.bidStep,
+                req.body.endDate,
+                req.file.filename,
+                req.body.idYear,
+                req.body.idBrand,
+                req.body.idType,
+                req.body.idCategory,
+                req.body.idCreator,
+            );
             res.send(dbLots);
         } catch (e) {
             return next(e);

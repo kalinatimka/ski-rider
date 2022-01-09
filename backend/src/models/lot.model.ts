@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 
 import db from '../data-access/database';
-import DBYear from './year.model';
 
 class DBLot extends Model {}
 
@@ -15,8 +14,9 @@ DBLot.init({
     description: DataTypes.TEXT,
     startPrice: DataTypes.INTEGER,
     bidStep: DataTypes.INTEGER,
-    endDate: DataTypes.INTEGER,
+    endDate: DataTypes.DATE,
     image: DataTypes.TEXT,
+    idYear: DataTypes.INTEGER,
     idBrand: DataTypes.INTEGER,
     idType: DataTypes.INTEGER,
     idCategory: DataTypes.INTEGER,
@@ -28,9 +28,5 @@ DBLot.init({
     tableName: 'lot',
     timestamps: false
 });
-
-DBYear.hasMany(DBLot, { foreignKey: 'idYear' });
-DBLot.belongsTo(DBYear, { foreignKey: 'idYear' });
-
 
 export default DBLot;
