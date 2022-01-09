@@ -1,59 +1,50 @@
 <main>
   <app-categories></app-categories>
-  <form class="form form--add-lot container"> <!-- form--invalid -->
-      <h2>Добавление лота</h2>
-      <div class="form__container-two">
-      <div class="form__item"> <!-- form__item--invalid -->
-          <label for="lot-name">Наименование</label>
-          <input id="lot-name" type="text" name="lot-name" placeholder="Введите наименование лота" required>
-          <span class="form__error">Напишите название лота</span>
-      </div>
-      <div class="form__item">
-          <label for="category">Категория</label>
-          <select id="category" name="category">
-          <option>Выберите категорию</option>
-          </select>
-          <span class="form__error">Выберите категорию</span>
-      </div>
-      </div>
-      <div class="form__item form__item--wide">
-      <label for="message">Описание</label>
-      <textarea id="message" name="message" placeholder="Напишите описание лота" required></textarea>
-      <span class="form__error">Напишите описание лота</span>
-      </div>
-      <div class="form__item form__item--file"> <!-- form__item--uploaded -->
-      <label>Изображение</label>
-      <div class="preview">
-          <button class="preview__remove" type="button">x</button>
-          <div class="preview__img">
-          <img src="img/avatar.jpg" width="113" height="113" alt="Изображение лота">
-          </div>
-      </div>
-      <div class="form__input-file">
-          <input class="visually-hidden" type="file" id="photo2" value="" name="lot-file">
-          <label for="photo2">
-          <span>+ Добавить</span>
-          </label>
-      </div>
-      </div>
-      <div class="form__container-three">
-      <div class="form__item form__item--small">
-          <label for="lot-rate">Начальная цена</label>
-          <input id="lot-rate" type="number" name="lot-rate" placeholder="0" required>
-          <span class="form__error">Введите начальную цену</span>
-      </div>
-      <div class="form__item form__item--small">
-          <label for="lot-step">Шаг ставки</label>
-          <input id="lot-step" type="number" name="lot-step" placeholder="0" required>
-          <span class="form__error">Введите шаг ставки</span>
-      </div>
-      <div class="form__item">
-          <label for="lot-date">Дата окончания торгов</label>
-          <input class="form__input-date" id="lot-date" type="datetime-local" name="lot-date" required>
-          <span class="form__error">Введите дату завершения торгов</span>
-      </div>
-      </div>
-      <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
-      <button type="submit" class="button">Добавить лот</button>
+  <form [formGroup]="form" class="container form">
+    <h2 class="form__header">Добавление лота</h2>
+    <div class="form__inputs-wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>Наименование</mat-label>
+        <input matInput placeholder="Введите наименование лота" formControlName="name">
+        <!-- <span class="form__error">Напишите название лота</span> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Категория</mat-label>
+        <mat-select formControlName="category">
+          <mat-option *ngFor="let category of categories" [value]="category.idCategory">{{ category.name }}</mat-option>
+        </mat-select>
+        <!-- <span class="form__error">Выберите категорию</span> -->
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Описание</mat-label>
+      <textarea matInput placeholder="Напишите описание лота" formControlName="description"></textarea>
+      <!-- <span class="form__error">Напишите описание лота</span> -->
+    </mat-form-field>
+    <div class="form__image">
+      <h3 class="form__image-header">Изображение</h3>
+      <app-image-picker
+        (selectedFile)="onFileSelected($event)"
+      ></app-image-picker>
+    </div>
+    <div class="form__inputs-wrapper">
+      <mat-form-field appearance="outline">
+        <mat-label>Начальная цена</mat-label>
+        <input matInput placeholder="0" formControlName="startPrice">
+        <!-- <span class="form__error">Введите начальную цену</span> -->
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Шаг ставки</mat-label>
+        <input matInput placeholder="0" formControlName="priceStep">
+        <!-- <span class="form__error">Введите шаг ставки</span> -->
+      </mat-form-field>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Дата окончания торгов</mat-label>
+      <input matInput type="datetime-local" formControlName="endDate">
+      <!-- <span class="form__error">Введите дату завершения торгов</span> -->
+    </mat-form-field>
+    <!-- <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span> -->
+    <button type="submit" class="button" (click)="uploadData()">Добавить лот</button>
   </form>
 </main>

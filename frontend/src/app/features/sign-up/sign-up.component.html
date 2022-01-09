@@ -27,18 +27,9 @@
     </mat-form-field>
     <div class="form__avatar">
       <h3 class="form__avatar-header">Аватар</h3>
-      <div  class="form__avatar-image">
-        <input class="form__avatar-file-input" type="file" id="fileInput" (change)="onSelectImageChange($event)">
-        <label for="fileInput" class="form__avatar-wrapper">
-          <div class="form__avatar-preview" [ngClass]="{'form__avatar-preview-visible': imgUrl}">
-            <button class="form__avatar-preview-remove" type="button">x</button>
-            <div class="form__avatar-preview-img">
-              <img [src]="imgUrl" width="115" height="115" alt="Ваш аватар">
-            </div>
-          </div>
-          <span class="form__avatar-button">+ Добавить</span>
-        </label>
-      </div>
+      <app-image-picker
+        (selectedFile)="onFileSelected($event)"
+      ></app-image-picker>
     </div>
     <button type="submit" class="button" (click)="uploadData()">Зарегистрироваться</button>
     <a class="form__login-link text-link" [routerLink]="['/login']">Уже есть аккаунт</a>

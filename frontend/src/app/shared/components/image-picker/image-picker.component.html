@@ -1,0 +1,12 @@
+<div class="form__avatar-image">
+  <input class="form__avatar-file-input" type="file" id="fileInput" (change)="onSelectImageChange($event)">
+  <label for="fileInput" class="form__avatar-wrapper">
+    <div class="form__avatar-preview" [ngClass]="{'form__avatar-preview-visible': imgUrl}">
+      <button class="form__avatar-preview-remove" type="button">x</button>
+      <div class="form__avatar-preview-img">
+        <img [src]="imgUrl" width="115" height="115" alt="Ваш аватар">
+      </div>
+    </div>
+    <span class="form__avatar-button">+ Добавить</span>
+  </label>
+</div>

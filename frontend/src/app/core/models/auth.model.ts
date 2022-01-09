@@ -1,5 +1,5 @@
 export interface AuthModel {
-  idUser: string
+  id: string
   login: string;
   avatar: string;
   token: string;

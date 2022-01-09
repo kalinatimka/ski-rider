@@ -1,19 +1,21 @@
 <li class="lots__item lot">
   <div class="lot__image">
-    <img src="" width="350" height="260" alt="Сноуборд">
+    <img [src]="getImageLink(lotData.image)" width="350" height="260" alt="Сноуборд">
   </div>
   <div class="lot__info">
     <span class="lot__category">
-      CATEGORY
+      {{ lotData.category.name }}
     </span>
-    <h3 class="lot__title"><a class="text-link" [routerLink]="['/lot']">
-        TITLE
-      </a></h3>
+    <h3 class="lot__title">
+      <a class="text-link" [routerLink]="['/lot']" [queryParams]="{id: lotData.idLot}">
+        {{ lotData.name }}
+      </a>
+    </h3>
     <div class="lot__state">
       <div class="lot__rate">
         <span class="lot__amount">Стартовая цена</span>
         <span class="lot__cost">
-          COST
+          {{ lotData.startPrice }}
         </span>
       </div>
       <div class="lot__timer timer">

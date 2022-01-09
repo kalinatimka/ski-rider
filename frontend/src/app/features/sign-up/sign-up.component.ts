@@ -11,7 +11,6 @@ import { PATH_CONFIG } from 'src/app-config/routes/path.config';
 })
 export class SignUpComponent implements OnInit {
   public form: FormGroup = null;
-  public imgUrl;
   public selectedFile: File = null;
 
   constructor(
@@ -29,16 +28,8 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  public onSelectImageChange(event) {
-    if (event.target.files) {
-      this.selectedFile = event.target.files[0];
-
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = (event) => {
-        this.imgUrl = event.target.result;
-      }
-    }
+  public onFileSelected(file: File): void {
+    this.selectedFile = file;
   }
 
   public uploadData(): void {

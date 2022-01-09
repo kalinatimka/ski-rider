@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthModel } from '../models/auth.model';
+import { AuthModel } from '../../models/auth.model';
 import { Observable } from 'rxjs';
 import { PATH_CONFIG } from 'src/app-config/routes/path.config';
 
@@ -28,7 +28,8 @@ export class AuthService {
   public logout(): void {
     localStorage.removeItem('idUser');
     localStorage.removeItem('login');
-    localStorage.removeItem("token");
+    localStorage.removeItem('avatar');
+    localStorage.removeItem('token');
   }
 
   public isLoggedIn(): boolean {
@@ -40,14 +41,14 @@ export class AuthService {
     const expiresAt = exp * 1000;
     console.log(new Date(expiresAt));
 
-    localStorage.setItem('idUser', authResult.idUser);
+    localStorage.setItem('idUser', authResult.id);
     localStorage.setItem('login', authResult.login);
     localStorage.setItem('avatar', authResult.avatar);
-    localStorage.setItem("token", authResult.token);
+    localStorage.setItem('token', authResult.token);
   }
 
   private getExpiration(): moment.Moment {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
 
     if (token) {
       const { exp } = jwt_decode<JwtPayload>(token);

@@ -10,6 +10,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -25,6 +26,7 @@ import { SignUpComponent } from './features/sign-up/sign-up.component';
 import { AddLotComponent } from './features/add-lot/add-lot.component';
 import { LotPageComponent } from './features/lot-page/lot-page.component';
 import { UserBidsPageComponent } from './features/user-bids-page/user-bids-page.component';
+import { ImagePickerComponent } from './shared/components/image-picker/image-picker.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { UserBidsPageComponent } from './features/user-bids-page/user-bids-page.
     LotPageComponent,
     LotsListComponent,
     UserBidsPageComponent,
+    ImagePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { UserBidsPageComponent } from './features/user-bids-page/user-bids-page.
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

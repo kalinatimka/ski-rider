@@ -2,9 +2,10 @@
   <app-categories></app-categories>
   <div class="container">
     <section class="lots">
-      <h2>Все лоты в категории <span>«CATEGORY»</span></h2>
-      <app-lots-list></app-lots-list>
+      <h2>Все лоты в категории <span>«{{ currentCategory }}»</span></h2>
+      <app-lots-list
+        [lots]="lots"
+      ></app-lots-list>
     </section>
   </div>
 </main>
-
