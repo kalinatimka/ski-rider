@@ -1,5 +1,10 @@
 import { CategoryModel } from "./category.model";
 
+export interface LotsDataModel {
+  lots: LotModel[],
+  totalPages: number,
+}
+
 export interface LotModel {
   idLot: string,
   name: string,

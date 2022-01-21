@@ -1,13 +1,24 @@
 <ul class="pagination-list">
   <li class="pagination-item pagination-item-prev">
-    <a class="link-disabled">Назад</a>
+    <a
+      [ngClass]="{ 'link-disabled': !isPrevButtonEnabled }"
+      (click)="onPageClick(currentPage - 1)">
+      Назад
+    </a>
   </li>
 
-  <li class="pagination-item pagination-item-active">
-    <a href="/">1</a>
+  <li
+    *ngFor="let page of pages"
+    class="pagination-item"
+    [ngClass]="{'pagination-item-active': page === currentPage}">
+    <a (click)="onPageClick(page)">{{ page }}</a>
   </li>
 
   <li class="pagination-item pagination-item-next">
-    <a class="link-disabled">Вперед</a>
+    <a
+      [ngClass]="{ 'link-disabled': !isNextButtonEnabled }"
+      (click)="onPageClick(currentPage + 1)">
+      Вперед
+    </a>
   </li>
 </ul>

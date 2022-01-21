@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { BehaviorSubject, combineLatest } from 'rxjs';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 
 import { CategoryModel } from 'src/app/core/models/category.model';
-import { LotCardModel, LotModel } from 'src/app/core/models/lot.model';
+import { LotCardModel, LotsDataModel } from 'src/app/core/models/lot.model';
+import { SearchParamsModel } from 'src/app/core/models/search-params.model';
 
 import { CategoriesService } from 'src/app/core/services/categories/categories.service';
 import { LotsService } from 'src/app/core/services/lots/lots.service';
@@ -15,28 +16,22 @@ import { LotsService } from 'src/app/core/services/lots/lots.service';
   styleUrls: ['./category-page.component.scss']
 })
 export class CategoryPageComponent implements OnInit {
-  public categoryId: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   public currentCategory: string = '';
   public lots: LotCardModel[] = null;
+  public totalPages: number = 0;
+  public searchParams: SearchParamsModel;
 
-  private isInitDataReady: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isInitDataReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private idToCategoryMap: Map<number, CategoryModel>;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private lotsService: LotsService,
     private categoriesService: CategoriesService,
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      if (params.id) {
-        this.categoryId.next(params.id);
-      } else {
-        // navigate with params
-      }
-    });
-
     combineLatest([
       this.categoriesService.getAllCategories(),
     ]).pipe(
@@ -45,37 +40,40 @@ export class CategoryPageComponent implements OnInit {
       CategoryModel[]
     ]) => {
       this.idToCategoryMap = this.categoriesService.createCategoriesMap(categories);
-      this.isInitDataReady.next(true);
-    })
+      this.isInitDataReady$.next(true);
+    });
 
     combineLatest([
-      this.categoryId,
-      this.isInitDataReady,
+      this.isInitDataReady$,
+      this.route.queryParams,
     ]).pipe(
-      filter(([id, isInitDataReady]) => !!id && isInitDataReady),
-      tap(() => {
+      filter(([isInitDataReady]) => isInitDataReady),
+      switchMap(([_, queryParams]) => {
+        const categoryId = Number(queryParams.id) || 1;
+
+        this.searchParams = {
+          pageNumber: Number(queryParams.pageNumber) || 0,
+          pageSize: Number(queryParams.pageSize) || 6,
+        }
+
         this.lots = [];
-        this.currentCategory = this.idToCategoryMap.get(Number(this.categoryId.getValue()))?.name;
-        // start loadinng
-      }),
-      switchMap(([id]) => {
-        return this.lotsService.getLotsByCategory(id);
+        this.totalPages = 0;
+        this.currentCategory = this.idToCategoryMap.get(categoryId)?.name;
+
+        return this.lotsService.getLotsByCategory(categoryId, this.searchParams);
       })
-    ).subscribe((lots: LotModel[]) => {
-      this.lots = lots.map((lot: LotModel) => ({
-        idLot: lot.idLot,
-        name: lot.name,
-        startPrice: lot.startPrice,
-        endDate: lot.endDate * 1000,
-        image: lot.image,
-        year: 1,
-        brand: '',
-        type: '',
-        category: this.idToCategoryMap.get(lot.idCategory),
-        idWinner: lot.idWinner,
-      }));
-      // end loading
+    ).subscribe((lotsData: LotsDataModel) => {
+      this.lots = this.lotsService.generateLotCardsData(lotsData.lots, this.idToCategoryMap);
+      this.totalPages = lotsData.totalPages;
     });
   }
 
+  public onPageChanged(page: number): void {
+    this.router.navigate([], {
+      queryParams: {
+        pageNumber: page - 1,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
 }
