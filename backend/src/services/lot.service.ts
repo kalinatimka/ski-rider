@@ -1,8 +1,9 @@
-import '../models/saved-lots.model';
-import DBLot from '../models/lot.model';
-import DBUser from '../models/user.model';
+import '../db-models/saved-lots.model';
+import DBLot from '../db-models/lot.model';
+import DBUser from '../db-models/user.model';
 
 import sequelize from 'sequelize';
+import { SearchParamsModel } from '../models/search-params.model';
 
 export default class LotService {
     public async getAllLots() {
@@ -18,16 +19,18 @@ export default class LotService {
         }
     }
 
-    public async getLotsByCategory(idCategory: string) {
+    public async getLotsByCategory(idCategory: string, searchParams: SearchParamsModel) {
         try {
-            return await DBLot.findAll({
+            return await DBLot.findAndCountAll({
+                where: {
+                    idCategory
+                },
                 attributes: [
                     ...Object.keys(DBLot.rawAttributes),
                     [sequelize.fn('unix_timestamp', sequelize.col('endDate')), 'endDate']
                 ],
-                where: {
-                    idCategory
-                }
+                limit: searchParams.pageSize,
+                offset: searchParams.pageNumber * searchParams.pageSize
             });
         } catch (e) {
             console.error(`Method: "getAllLots". Message: ${e.message}`);

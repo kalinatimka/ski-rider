@@ -1,4 +1,4 @@
-import DBCategory from '../models/category.model';
+import DBCategory from '../db-models/category.model';
 
 export default class CategoryService {
     public async getAllCategories() {

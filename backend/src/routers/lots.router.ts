@@ -1,4 +1,5 @@
 import { Request, Response, Router, NextFunction } from 'express';
+import { SearchParamsModel } from 'src/models/search-params.model';
 
 import multerMW from '../middlewares/multer';
 import LotService from '../services/lot.service';
@@ -34,8 +35,15 @@ lotsRouter.get(
     '/getLotsByCategory/:categoryId',
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const dbLots = await lotService.getLotsByCategory(req.params.categoryId);
-            res.send(dbLots);
+            const searchParams: SearchParamsModel = {
+                pageNumber: Number(req.query.pageNumber),
+                pageSize: Number(req.query.pageSize)
+            };
+            const dbLots = await lotService.getLotsByCategory(req.params.categoryId, searchParams);
+            res.send({
+                lots: dbLots.rows,
+                totalPages: Math.ceil(dbLots.count / searchParams.pageSize)
+            });
         } catch (e) {
             return next(e);
         }

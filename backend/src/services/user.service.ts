@@ -1,4 +1,4 @@
-import DBUser from '../models/user.model';
+import DBUser from '../db-models/user.model';
 
 export default class UserService {
     public async getAllUsers() {
