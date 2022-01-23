@@ -8,4 +8,16 @@ export default class CategoryService {
             console.error(`Method: "getAllCategories". Message: ${e.message}`);
         }
     }
+
+    public async getCategoryById(idCategory: string) {
+        try {
+            return await DBCategory.findOne({
+                where: {
+                    idCategory
+                }
+            });
+        } catch (e) {
+            console.error(`Method: "getAllCategories". Message: ${e.message}`);
+        }
+    }
 }

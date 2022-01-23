@@ -75,4 +75,16 @@ lotsRouter.post(
     }
 );
 
+lotsRouter.get(
+    '/getLotFullData/:lotId',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const lot = await lotService.getLotFullData(req.params.lotId);
+            res.send(lot);
+        } catch (e) {
+            return next(e);
+        }
+    }
+);
+
 export default lotsRouter;

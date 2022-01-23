@@ -1,11 +1,44 @@
 import '../db-models/saved-lots.model';
 import DBLot from '../db-models/lot.model';
 import DBUser from '../db-models/user.model';
+import { SearchParamsModel } from '../models/search-params.model';
+import db from '../data-access/database';
 
 import sequelize from 'sequelize';
-import { SearchParamsModel } from '../models/search-params.model';
+import BidService from './bid.service';
+import CategoryService from './category.service';
 
 export default class LotService {
+    public async getLotFullData(idLot: string) {
+        try {
+            return await db.transaction(async () => {
+                const lot = await DBLot.findOne({
+                    where: {
+                        idLot
+                    },
+                    attributes: [
+                        ...Object.keys(DBLot.rawAttributes),
+                        [sequelize.fn('unix_timestamp', sequelize.col('endDate')), 'endDate']
+                    ]
+                });
+
+                const bidService = new BidService();
+                const bids = await bidService.getAllBids(idLot);
+
+                const categoryService = new CategoryService();
+                const category = await categoryService.getCategoryById(lot.getDataValue('idCategory'));
+
+                return {
+                    lot,
+                    bids,
+                    category
+                };
+            });
+        } catch (e) {
+            console.error(`Method: "getLotFullData". Message: ${e.message}`);
+        }
+    }
+
     public async getAllLots() {
         try {
             return await DBLot.findAll({
