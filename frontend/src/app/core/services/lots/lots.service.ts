@@ -23,6 +23,12 @@ export class LotsService {
     );
   }
 
+  public getLotFullData(idlot: string) {
+    return this.http.get(
+      PATH_CONFIG.LOT_FULL_DATA_URL.replace('{idLot}', idlot),
+    );
+  }
+
   public generateLotCardsData(lots: LotModel[], idToCategoryMap: Map<number, CategoryModel>): LotCardModel[] {
     return lots.map((lot: LotModel) => ({
       idLot: lot.idLot,

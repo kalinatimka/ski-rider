@@ -1,49 +1,48 @@
 <main>
-    <app-categories></app-categories>
-    <section class="lot-item container">
-        <h2>Lot Name</h2>
-        <div class="lot-item__content">
-        <div class="lot-item__left">
-            <div class="lot-item__image">
-            <img src="" width="730" height="548" alt="Сноуборд">
-            </div>
-            <p class="lot-item__category">Категория: <span>Category</span></p>
-            <p class="lot-item__description">Lot Description</p>
+  <app-categories></app-categories>
+  <section class="lot-item container" *ngIf="lot">
+    <h2>{{ lot.name }}</h2>
+    <div class="lot-item__content">
+      <div class="lot-item__left">
+        <div class="lot-item__image">
+          <img [src]="getImageLink(lot.image)" width="730" height="548" alt="Сноуборд">
         </div>
-        <div class="lot-item__right">
-            <div class="lot-item__state">
-            <div class="lot-item__timer timer">
-                TIMER
+        <p class="lot-item__category">Категория: <span>{{ category.name }}</span></p>
+        <p class="lot-item__description">{{ lot.description }}</p>
+      </div>
+      <div class="lot-item__right" *ngIf="isUserLoggenIn()">
+        <div class="lot-item__state">
+          <div class="lot-item__timer timer">
+            {{ timeToClose }}
+          </div>
+          <div class="lot-item__cost-state">
+            <div class="lot-item__rate">
+              <span class="lot-item__amount">Текущая цена</span>
+              <span class="lot-item__cost">{{ currentPrice }}</span>
             </div>
-            <div class="lot-item__cost-state">
-                <div class="lot-item__rate">
-                <span class="lot-item__amount">Текущая цена</span>
-                <span class="lot-item__cost">CURRENT PRICE</span>
-                </div>
-                <div class="lot-item__min-cost">
-                Мин. ставка <span>PRICE р</span>
-                </div>
+            <div class="lot-item__min-cost">
+              Мин. ставка <span>{{ bidMinPrice }}</span>
             </div>
-            <form class="lot-item__form" action="lot.php" method="post">
-                <p class="lot-item__form-item">
-                <label for="cost">Ваша ставка</label>
-                <input id="cost" type="number" name="cost" placeholder="" min="" required>
-                <input type="hidden" name="id">
-                </p>
-                <button type="submit" class="button">Сделать ставку</button>
-            </form>
-            </div>
-            <div class="history">
-            <h3>История ставок (<span></span>)</h3>
-            <table class="history__list">
-                <tr class="history__item">
-                <td class="history__name">USER_NAME</td>
-                <td class="history__price">BID_PRICE</td>
-                <td class="history__time">BID_TIME</td>
-                </tr>
-            </table>
-            </div>
+          </div>
+          <form class="lot-item__form" [formGroup]="form">
+            <mat-form-field appearance="outline" class="lot-item__form-item">
+              <mat-label>Ваша ставка</mat-label>
+              <input matInput type="number" [placeholder]="bidMinPrice" [min]="bidMinPrice" formControlName="cost">
+            </mat-form-field>
+            <button type="submit" class="button" (click)="makeBid()" [disabled]="form.invalid">Сделать ставку</button>
+          </form>
         </div>
+        <div class="history">
+          <h3>История ставок (<span>{{ bids.length }}</span>)</h3>
+          <table class="history__list">
+            <tr *ngFor="let bid of bids" class="history__item">
+              <td class="history__name">{{ bid.user.login }}</td>
+              <td class="history__price">{{ bid.price }}</td>
+              <td class="history__time">{{ getBidDate(bid.date) }}</td>
+            </tr>
+          </table>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </main>

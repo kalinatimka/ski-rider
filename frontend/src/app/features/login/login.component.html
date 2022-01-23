@@ -3,13 +3,13 @@
   <form [formGroup]="form" class="form container">
     <h2 class="form__header">Вход</h2>
     <mat-form-field appearance="outline">
-      <mat-label>E-mail*</mat-label>
-      <input matInput placeholder="Введите e-mail" formControlName="mail">
+      <mat-label>E-mail</mat-label>
+      <input matInput placeholder="Введите e-mail" type="email" formControlName="mail">
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
-      <mat-label>Пароль*</mat-label>
-      <input matInput placeholder="Введите пароль" formControlName="password">
+      <mat-label>Пароль</mat-label>
+      <input matInput placeholder="Введите пароль" type="password" formControlName="password">
       <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
     <button type="submit" class="button" (click)="login()">Войти</button>

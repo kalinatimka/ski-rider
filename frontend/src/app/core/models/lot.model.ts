@@ -1,3 +1,4 @@
+import { BidModel } from "./bid.model";
 import { CategoryModel } from "./category.model";
 
 export interface LotsDataModel {
@@ -19,6 +20,12 @@ export interface LotModel {
   idCategory: number,
   idCreator: number,
   idWinner: number,
+}
+
+export interface FullLotModel {
+  lot: LotModel,
+  bids: BidModel[],
+  category: CategoryModel,
 }
 
 export interface LotCardModel {
