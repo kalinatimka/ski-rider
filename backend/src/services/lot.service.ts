@@ -100,6 +100,28 @@ export default class LotService {
         }
     }
 
+    public async getSearchedLots(search: string, searchParams: SearchParamsModel) {
+        try {
+            return await DBLot.findAndCountAll({
+                where: sequelize.literal('MATCH (name, description) AGAINST (:search)'),
+                replacements: {
+                    search
+                },
+                order: [
+                    [searchParams.propertyName, searchParams.order]
+                ],
+                attributes: [
+                    ...Object.keys(DBLot.rawAttributes),
+                    [sequelize.fn('unix_timestamp', sequelize.col('endDate')), 'endDate']
+                ],
+                limit: searchParams.pageSize,
+                offset: searchParams.pageNumber * searchParams.pageSize
+            });
+        } catch (e) {
+            console.error(`Method: "getSearchedLots". Message: ${e.message}`);
+        }
+    }
+
     public async getSavedLots() {
         const idUser = 2;
         try {
