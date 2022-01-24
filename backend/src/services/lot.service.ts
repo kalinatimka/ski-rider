@@ -57,6 +57,28 @@ export default class LotService {
         }
     }
 
+    public async getUserLots(idCreator: string, searchParams: SearchParamsModel) {
+        try {
+            return await DBLot.findAndCountAll({
+                where: {
+                    idCreator
+                },
+                order: [
+                    [searchParams.propertyName, searchParams.order]
+                ],
+                attributes: [
+                    ...Object.keys(DBLot.rawAttributes),
+                    [sequelize.fn('unix_timestamp', sequelize.col('endDate')), 'endDate']
+                ],
+                limit: searchParams.pageSize,
+                offset: searchParams.pageNumber * searchParams.pageSize
+            });
+        } catch (e) {
+            console.error(`Method: "getUserLots". Message: ${e.message}`);
+        }
+    }
+
+
     public async getLotsByCategory(idCategory: string, searchParams: SearchParamsModel) {
         try {
             return await DBLot.findAndCountAll({

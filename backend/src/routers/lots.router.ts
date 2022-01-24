@@ -29,6 +29,27 @@ lotsRouter.get(
 );
 
 lotsRouter.get(
+    '/getUserLots/:idCreator',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const searchParams: SearchParamsModel = {
+                pageNumber: Number(req.query.pageNumber),
+                pageSize: Number(req.query.pageSize),
+                propertyName: String(req.query.propertyName),
+                order: String(req.query.order)
+            };
+            const dbLots = await lotService.getUserLots(req.params.idCreator, searchParams);
+            res.send({
+                lots: dbLots.rows,
+                totalPages: Math.ceil(dbLots.count / searchParams.pageSize)
+            });
+        } catch (e) {
+            return next(e);
+        }
+    }
+);
+
+lotsRouter.get(
     '/getSavedLots',
     async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -45,6 +66,10 @@ lotsRouter.get(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const searchParams: SearchParamsModel = {
+                // pageNumber: 0,
+                // pageSize: 6,
+                // propertyName: 'creatingDate',
+                // order: 'desc'
                 pageNumber: Number(req.query.pageNumber),
                 pageSize: Number(req.query.pageSize),
                 propertyName: String(req.query.propertyName),
