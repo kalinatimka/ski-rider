@@ -11,8 +11,17 @@ lotsRouter.get(
     '/getAllLots',
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const dbLots = await lotService.getAllLots();
-            res.send(dbLots);
+            const searchParams: SearchParamsModel = {
+                pageNumber: Number(req.query.pageNumber),
+                pageSize: Number(req.query.pageSize),
+                propertyName: String(req.query.propertyName),
+                order: String(req.query.order)
+            };
+            const dbLots = await lotService.getAllLots(searchParams);
+            res.send({
+                lots: dbLots.rows,
+                totalPages: Math.ceil(dbLots.count / searchParams.pageSize)
+            });
         } catch (e) {
             return next(e);
         }
@@ -37,7 +46,9 @@ lotsRouter.get(
         try {
             const searchParams: SearchParamsModel = {
                 pageNumber: Number(req.query.pageNumber),
-                pageSize: Number(req.query.pageSize)
+                pageSize: Number(req.query.pageSize),
+                propertyName: String(req.query.propertyName),
+                order: String(req.query.order)
             };
             const dbLots = await lotService.getLotsByCategory(req.params.categoryId, searchParams);
             res.send({

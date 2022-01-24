@@ -39,13 +39,18 @@ export default class LotService {
         }
     }
 
-    public async getAllLots() {
+    public async getAllLots(searchParams: SearchParamsModel) {
         try {
-            return await DBLot.findAll({
+            return await DBLot.findAndCountAll({
+                order: [
+                    [searchParams.propertyName, searchParams.order]
+                ],
                 attributes: [
                     ...Object.keys(DBLot.rawAttributes),
                     [sequelize.fn('unix_timestamp', sequelize.col('endDate')), 'endDate']
-                ]
+                ],
+                limit: searchParams.pageSize,
+                offset: searchParams.pageNumber * searchParams.pageSize
             });
         } catch (e) {
             console.error(`Method: "getAllLots". Message: ${e.message}`);
@@ -58,6 +63,9 @@ export default class LotService {
                 where: {
                     idCategory
                 },
+                order: [
+                    [searchParams.propertyName, searchParams.order]
+                ],
                 attributes: [
                     ...Object.keys(DBLot.rawAttributes),
                     [sequelize.fn('unix_timestamp', sequelize.col('endDate')), 'endDate']
@@ -66,7 +74,7 @@ export default class LotService {
                 offset: searchParams.pageNumber * searchParams.pageSize
             });
         } catch (e) {
-            console.error(`Method: "getAllLots". Message: ${e.message}`);
+            console.error(`Method: "getLotsByCategory". Message: ${e.message}`);
         }
     }
 
@@ -103,7 +111,9 @@ export default class LotService {
         idCreator: number,
     ) {
         try {
+            const date = new Date(Date.now()).toISOString();
             return await DBLot.create({
+                creatingDate: date,
                 name,
                 description,
                 startPrice,

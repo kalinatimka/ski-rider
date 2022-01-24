@@ -10,6 +10,7 @@ DBLot.init({
         primaryKey: true,
         autoIncrement: true
     },
+    creatingDate: DataTypes.DATE,
     name: DataTypes.TEXT,
     description: DataTypes.TEXT,
     startPrice: DataTypes.INTEGER,
