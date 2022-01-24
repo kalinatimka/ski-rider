@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PATH_CONFIG } from 'src/app-config/routes/path.config';
 import { LotCardModel } from 'src/app/core/models/lot.model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { TimeService } from 'src/app/core/services/time/time.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class LotCardComponent implements OnInit {
 
   constructor(
     private timeService: TimeService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -27,5 +29,9 @@ export class LotCardComponent implements OnInit {
 
   getImageLink(fileName: string): string {
     return PATH_CONFIG.LOT_IMAGE_URL.replace('{filename}', fileName);
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

@@ -7,6 +7,7 @@ import { PATH_CONFIG } from 'src/app-config/routes/path.config';
 import { BidModel } from 'src/app/core/models/bid.model';
 import { CategoryModel } from 'src/app/core/models/category.model';
 import { FullLotModel, LotModel } from 'src/app/core/models/lot.model';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 
 import { BidsService } from 'src/app/core/services/bids/bids.service';
 import { LotsService } from 'src/app/core/services/lots/lots.service';
@@ -35,6 +36,7 @@ export class LotPageComponent implements OnInit {
     private bidsService: BidsService,
     private lotsService: LotsService,
     private timeService: TimeService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -88,8 +90,8 @@ export class LotPageComponent implements OnInit {
     return PATH_CONFIG.LOT_IMAGE_URL.replace('{filename}', fileName);
   }
 
-  public isUserLoggenIn(): boolean {
-    return !!localStorage.getItem('idUser');
+  public isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
   public getBidDate(timestamp: number): string {

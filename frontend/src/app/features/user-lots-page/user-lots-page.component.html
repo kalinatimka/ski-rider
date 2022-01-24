@@ -1,0 +1,17 @@
+<main>
+  <app-categories></app-categories>
+  <div class="container">
+    <section class="lots">
+      <h2>Мои лоты</h2>
+      <app-lots-list
+        [lots]="lots"
+      ></app-lots-list>
+    </section>
+    <app-pagination
+      *ngIf="totalPages > 1"
+      [currentPage]="searchParams.pageNumber + 1"
+      [pagesCount]="totalPages"
+      (pageChanged)="onPageChanged($event)"
+    ></app-pagination>
+  </div>
+</main>

@@ -1,4 +1,9 @@
 <li class="lots__item lot">
+  <app-save-lot
+    class="saved-lot"
+    *ngIf="isLoggedIn()"
+    (saveButtonClick)="true">
+  </app-save-lot>
   <div class="lot__image">
     <img [src]="getImageLink(lotData.image)" width="350" height="260" alt="Сноуборд">
   </div>

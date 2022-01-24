@@ -18,9 +18,14 @@
           <img [src]="getAvatarLink()" width="40" height="40" alt="Пользователь">
         </div>
         <div class="user-menu__logged">
-          <a class="my-lots" href="my-lots.php">
-            <p>{{getUserData('login')}}</p>
+          <a class="my-lots" [matMenuTriggerFor]="beforeMenu">
+            <p>{{ getUserData('login') }}</p>
           </a>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item routerLink="/my-lots">Мои лоты</button>
+            <button mat-menu-item routerLink="/my-bids">Мои ставки</button>
+            <button mat-menu-item routerLink="/saved-lots">Сохраненные лоты</button>
+          </mat-menu>
           <p><a (click)="onLogOut()">Выход</a></p>
         </div>
       </div>

@@ -23,6 +23,15 @@ export class LotsService {
     );
   }
 
+  public getUserLots(idCreator: number, searchParams: SearchParamsModel) {
+    return this.http.get(
+      PATH_CONFIG.USER_LOTS.replace('{idCreator}', String(idCreator)),
+      {
+        params: { ...searchParams }
+      }
+    );
+  }
+
   public getLotsByCategory(idCategory: number, searchParams: SearchParamsModel) {
     return this.http.get(
       PATH_CONFIG.LOTS_BY_CATEGORY_URL.replace('{idCategory}', String(idCategory)),

@@ -18,6 +18,13 @@
 
 .lot-item__left {
   width: 730px;
+  position: relative;
+
+  .saved-lot {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+  }
 }
 
 .lot-item__right {
