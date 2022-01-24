@@ -54,6 +54,8 @@ export class CategoryPageComponent implements OnInit {
         this.searchParams = {
           pageNumber: Number(queryParams.pageNumber) || 0,
           pageSize: Number(queryParams.pageSize) || 6,
+          propertyName: queryParams.propertyName || 'creatingDate',
+          order: queryParams.order || 'desc',
         }
 
         this.lots = [];

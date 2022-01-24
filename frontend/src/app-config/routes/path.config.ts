@@ -9,6 +9,7 @@ export const PATH_CONFIG = {
 
   LOT_IMAGE_URL: `${LOCAL_URL}/uploads/lots/{filename}`,
   LOT_FULL_DATA_URL: `${LOCAL_URL}/lots/getLotFullData/{idLot}`,
+  ALL_LOTS: `${LOCAL_URL}/lots/getAllLots`,
   LOTS_BY_CATEGORY_URL: `${LOCAL_URL}/lots/getLotsByCategory/{idCategory}`,
   ADD_LOT_URL: `${LOCAL_URL}/lots/addLot`,
 

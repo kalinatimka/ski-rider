@@ -57,6 +57,7 @@ export class LotPageComponent implements OnInit {
 
         this.updatePrices(this.lot, this.bids);
 
+        this.timeToClose = this.getTimeToClose(this.lot.endDate);
         setInterval(() => {
           this.timeToClose = this.getTimeToClose(this.lot.endDate);
         }, 1000);

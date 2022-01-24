@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PATH_CONFIG } from 'src/app-config/routes/path.config';
 import { LotCardModel } from 'src/app/core/models/lot.model';
+import { TimeService } from 'src/app/core/services/time/time.service';
 
 @Component({
   selector: 'app-lot-card',
@@ -11,10 +12,17 @@ export class LotCardComponent implements OnInit {
   @Input()
   public lotData: LotCardModel;
 
+  public timeToClose: string;
 
-  constructor() { }
+  constructor(
+    private timeService: TimeService,
+  ) { }
 
   ngOnInit(): void {
+    this.timeToClose = this.timeService.timeToClose(this.lotData.endDate);
+    setInterval(() => {
+      this.timeToClose = this.timeService.timeToClose(this.lotData.endDate);
+    }, 1000)
   }
 
   getImageLink(fileName: string): string {

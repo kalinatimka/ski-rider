@@ -14,6 +14,15 @@ export class LotsService {
     private http: HttpClient
   ) { }
 
+  public getAllLots(searchParams: SearchParamsModel) {
+    return this.http.get(
+      PATH_CONFIG.ALL_LOTS,
+      {
+        params: { ...searchParams }
+      }
+    );
+  }
+
   public getLotsByCategory(idCategory: number, searchParams: SearchParamsModel) {
     return this.http.get(
       PATH_CONFIG.LOTS_BY_CATEGORY_URL.replace('{idCategory}', String(idCategory)),
@@ -34,7 +43,7 @@ export class LotsService {
       idLot: lot.idLot,
       name: lot.name,
       startPrice: lot.startPrice,
-      endDate: lot.endDate * 1000,
+      endDate: lot.endDate,
       image: lot.image,
       year: 1,
       brand: '',
