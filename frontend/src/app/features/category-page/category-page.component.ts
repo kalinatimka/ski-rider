@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, of } from 'rxjs';
-import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, combineLatest } from 'rxjs';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 import { CategoryModel } from 'src/app/core/models/category.model';
 import { LotCardModel, LotsDataModel } from 'src/app/core/models/lot.model';

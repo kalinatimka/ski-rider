@@ -13,6 +13,7 @@ export const PATH_CONFIG = {
   LOTS_BY_CATEGORY_URL: `${LOCAL_URL}/lots/getLotsByCategory/{idCategory}`,
   ADD_LOT_URL: `${LOCAL_URL}/lots/addLot`,
   USER_LOTS: `${LOCAL_URL}/lots/getUserLots/{idCreator}`,
+  SEARCH_LOTS: `${LOCAL_URL}/lots/searchLots`,
 
   CATEGORIES_URL: `${LOCAL_URL}/categories/getAllCategories`,
 }

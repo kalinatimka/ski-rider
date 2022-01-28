@@ -1,0 +1,24 @@
+<form [formGroup]="form" class="filter-panel">
+  <div class="dropdowns">
+    <mat-form-field appearance="outline">
+      <mat-label>Показать</mat-label>
+      <mat-select
+        formControlName="order"
+      >
+        <mat-option [value]="'desc'">Сначала новые</mat-option>
+        <mat-option [value]="'asc'">Сначала старые</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>На странице</mat-label>
+      <mat-select
+        formControlName="pageSize"
+      >
+        <mat-option [value]="3">по 3 лота</mat-option>
+        <mat-option [value]="6">по 6 лотов</mat-option>
+        <mat-option [value]="9">по 9 лотов</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <button type="submit" class="button filter-button" (click)="true">Применить</button>
+</form>

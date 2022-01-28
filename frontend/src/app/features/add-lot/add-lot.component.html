@@ -5,7 +5,7 @@
     <div class="form__inputs-wrapper">
       <mat-form-field appearance="outline">
         <mat-label>Наименование</mat-label>
-        <input matInput placeholder="Введите наименование лота" formControlName="name">
+        <input matInput placeholder="Введите наименование лота" formControlName="name" autocomplete="off">
         <!-- <span class="form__error">Напишите название лота</span> -->
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -30,18 +30,18 @@
     <div class="form__inputs-wrapper">
       <mat-form-field appearance="outline">
         <mat-label>Начальная цена</mat-label>
-        <input matInput placeholder="0" formControlName="startPrice">
+        <input matInput placeholder="0" formControlName="startPrice" autocomplete="off">
         <!-- <span class="form__error">Введите начальную цену</span> -->
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Шаг ставки</mat-label>
-        <input matInput placeholder="0" formControlName="priceStep">
+        <input matInput placeholder="0" formControlName="priceStep" autocomplete="off">
         <!-- <span class="form__error">Введите шаг ставки</span> -->
       </mat-form-field>
     </div>
     <mat-form-field appearance="outline">
       <mat-label>Дата окончания торгов</mat-label>
-      <input matInput type="datetime-local" formControlName="endDate">
+      <input matInput type="datetime-local" formControlName="endDate" autocomplete="off">
       <!-- <span class="form__error">Введите дату завершения торгов</span> -->
     </mat-form-field>
     <!-- <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span> -->

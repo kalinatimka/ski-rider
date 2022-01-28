@@ -41,6 +41,18 @@ export class LotsService {
     );
   }
 
+  public searchLots(searchQuery: string, searchParams: SearchParamsModel) {
+    return this.http.get(
+      PATH_CONFIG.SEARCH_LOTS,
+      {
+        params: {
+          searchQuery,
+          ...searchParams
+        }
+      }
+    );
+  }
+
   public getLotFullData(idlot: string) {
     return this.http.get(
       PATH_CONFIG.LOT_FULL_DATA_URL.replace('{idLot}', idlot),

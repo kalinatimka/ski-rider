@@ -35,6 +35,7 @@ import { UserLotsPageComponent } from './features/user-lots-page/user-lots-page.
 import { SearchPageComponent } from './features/search-page/search-page.component';
 import { SavedLotsPageComponent } from './features/saved-lots-page/saved-lots-page.component';
 import { SaveLotComponent } from './shared/components/save-lot/save-lot.component';
+import { FilterPanelComponent } from './shared/components/filter-panel/filter-panel.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { SaveLotComponent } from './shared/components/save-lot/save-lot.componen
     SearchPageComponent,
     SavedLotsPageComponent,
     SaveLotComponent,
+    FilterPanelComponent,
   ],
   imports: [
     BrowserModule,

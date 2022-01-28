@@ -32,7 +32,7 @@
           <form class="lot-item__form" [formGroup]="form">
             <mat-form-field appearance="outline" class="lot-item__form-item">
               <mat-label>Ваша ставка</mat-label>
-              <input matInput type="number" [placeholder]="bidMinPrice" [min]="bidMinPrice" formControlName="cost">
+              <input matInput type="number" [placeholder]="bidMinPrice" [min]="bidMinPrice" formControlName="cost" autocomplete="off">
             </mat-form-field>
             <button type="submit" class="button" (click)="makeBid()" [disabled]="form.invalid">Сделать ставку</button>
           </form>

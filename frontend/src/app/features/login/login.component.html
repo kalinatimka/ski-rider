@@ -4,12 +4,12 @@
     <h2 class="form__header">Вход</h2>
     <mat-form-field appearance="outline">
       <mat-label>E-mail</mat-label>
-      <input matInput placeholder="Введите e-mail" type="email" formControlName="mail">
+      <input matInput placeholder="Введите e-mail" type="email" formControlName="mail" autocomplete="off">
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Пароль</mat-label>
-      <input matInput placeholder="Введите пароль" type="password" formControlName="password">
+      <input matInput placeholder="Введите пароль" type="password" formControlName="password" autocomplete="off">
       <mat-icon matSuffix>lock</mat-icon>
     </mat-form-field>
     <button type="submit" class="button" (click)="login()">Войти</button>

@@ -1,5 +1,5 @@
 <div class="form__avatar-image">
-  <input class="form__avatar-file-input" type="file" id="fileInput" (change)="onSelectImageChange($event)">
+  <input class="form__avatar-file-input" type="file" id="fileInput" (change)="onSelectImageChange($event)" autocomplete="off">
   <label for="fileInput" class="form__avatar-wrapper">
     <div class="form__avatar-preview" [ngClass]="{'form__avatar-preview-visible': imgUrl}">
       <button class="form__avatar-preview-remove" type="button">x</button>

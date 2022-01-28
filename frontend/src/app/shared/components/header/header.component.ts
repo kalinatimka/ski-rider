@@ -34,4 +34,13 @@ export class HeaderComponent implements OnInit {
   public getAvatarLink(): string {
     return PATH_CONFIG.AVATARS_URL.replace('{filename}', this.getUserData('avatar'));
   }
+
+  public search(event): void {
+    this.router.navigate(['/search'], {
+      queryParams: {
+        search: event.target.value,
+      },
+      queryParamsHandling: 'merge',
+    });
+  }
 }

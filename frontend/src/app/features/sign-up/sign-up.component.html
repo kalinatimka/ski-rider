@@ -4,19 +4,19 @@
     <h2 class="form__header">Регистрация нового аккаунта</h2>
     <mat-form-field appearance="outline">
       <mat-label>E-mail</mat-label>
-      <input matInput placeholder="Введите e-mail" type="email" formControlName="mail">
+      <input matInput placeholder="Введите e-mail" type="email" formControlName="mail" autocomplete="off">
       <mat-icon matSuffix>email</mat-icon>
       <!-- <span class="form__error">"Этот email занят!"</span> -->
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Пароль</mat-label>
-      <input matInput placeholder="Введите пароль" type="password" formControlName="password">
+      <input matInput placeholder="Введите пароль" type="password" formControlName="password" autocomplete="off">
       <mat-icon matSuffix>lock</mat-icon>
       <!-- <span class="form__error">Введите пароль</span> -->
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Имя</mat-label>
-      <input matInput placeholder="Введите имя" formControlName="name">
+      <input matInput placeholder="Введите имя" formControlName="name" autocomplete="off">
       <mat-icon matSuffix>badge</mat-icon>
       <!-- <span class="form__error">Введите имя</span> -->
     </mat-form-field>

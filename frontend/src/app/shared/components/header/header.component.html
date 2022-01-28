@@ -6,7 +6,7 @@
     <form class="main-header__search">
       <mat-form-field appearance="outline">
         <mat-label>Поиск лота</mat-label>
-        <input matInput placeholder="Введите поисковой запрос" autocomplete="off">
+        <input matInput placeholder="Введите поисковой запрос" autocomplete="off" (keydown.enter)="search($event)" autocomplete="off">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </form>
